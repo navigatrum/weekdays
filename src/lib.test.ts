@@ -61,6 +61,12 @@ describe('weekdays', () => {
     expect(result).toEqual(expected);
   });
 
+  it('returns long uppercase weekdays in Turkish', () => {
+    const expected = ['PAZAR', 'PAZARTESİ', 'SALI', 'ÇARŞAMBA', 'PERŞEMBE', 'CUMA', 'CUMARTESİ'];
+    const result = weekdays('tr', { formatCase: 'upper' });
+    expect(result).toEqual(expected);
+  });
+
   it('returns weekdays in Chinese starting from today when startFrom is "today"', () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date(2025, 9, 20)); // Monday
