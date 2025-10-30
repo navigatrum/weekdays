@@ -20,10 +20,11 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - name: 📥 Install pnpm (from package.json)
+      - name: 📥 Install pnpm (via Corepack)
+        shell: bash
         run: |
-          VERSION=$(node -p "require('./package.json').engines.pnpm")
-          npm install -g pnpm@$VERSION
+          corepack enable
+          corepack install
 
       - name: 📦 Install dependencies
         run: pnpm install
