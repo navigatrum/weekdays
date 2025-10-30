@@ -20,6 +20,11 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      - name: 📥 Install pnpm (from package.json)
+        run: |
+          VERSION=$(node -p "require('./package.json').engines.pnpm")
+          npm install -g pnpm@$VERSION
+
       - name: 📦 Install dependencies
         run: pnpm install
 
