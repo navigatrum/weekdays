@@ -44,20 +44,18 @@ export const weekdays = (locales?: string | string[], options?: WeekdaysOptions)
   const { format } = new Intl.DateTimeFormat(locales, { weekday: dayStyle });
   const MS_PER_DAY = 86400000;
   const days: string[] = [];
-  let day: string;
+
   for (let i = 0; i < 7; i++) {
-    day = format(MS_PER_DAY * i + time);
-    switch (formatCase) {
-      case 'capital':
-        day = day.charAt(0).toUpperCase() + day.slice(1);
-        break;
-      case 'lower':
-        day = day.toLowerCase();
-        break;
-      case 'upper':
-        day = day.toUpperCase();
-    }
-    days.push(day);
+    days.push(format(MS_PER_DAY * i + time));
+  }
+
+  switch (formatCase) {
+    case 'capital':
+      return days.map((d) => d.charAt(0).toLocaleUpperCase(locales) + d.slice(1));
+    case 'lower':
+      return days.map((d) => d.toLocaleLowerCase(locales));
+    case 'upper':
+      return days.map((d) => d.toLocaleUpperCase(locales));
   }
 
   return days;
