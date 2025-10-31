@@ -66,7 +66,7 @@ weekdays({ locales: "zh-CN", first: 1, style: "short" });
 
 ```ts
 type WeekdaysOptions = {
-  locales?: string | string[]; // default: current locale
+  locales?: string | string[]; // default: system/browser locale
   style?: "long" | "short" | "narrow"; // default: "long"
   case?: "capital" | "upper" | "lower"; // default: native casing
   first?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | "current"; // default: 0 (Sunday)
