@@ -12,10 +12,11 @@ Supports:
 
 ---
 
-[![npm version](https://img.shields.io/npm/v/weekdays.svg)](https://www.npmjs.com/package/weekdays)
-[![License](https://img.shields.io/npm/l/weekdays.svg)](LICENSE)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/navigatrum/weekdays/ci.yml?branch=main)](https://github.com/navigatrum/weekdays/actions)
-[![Coverage](https://img.shields.io/codecov/c/github/navigatrum/weekdays)](https://codecov.io/gh/navigatrum/weekdays)
+[![npm version](https://img.shields.io/npm/v/@navigatrum/weekdays)](https://www.npmjs.com/package/@navigatrum/weekdays)
+[![Bundle size](https://img.shields.io/bundlephobia/minzip/@navigatrum/weekdays)](https://bundlephobia.com/result?p=@navigatrum/weekdays)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/navigatrum/weekdays/ci.yml?branch=master)](https://github.com/navigatrum/weekdays/actions)
+[![Types](https://img.shields.io/badge/types-included-brightgreen)](#)
+[![License](https://img.shields.io/npm/l/@navigatrum/weekdays)](LICENSE)
 
 ---
 
