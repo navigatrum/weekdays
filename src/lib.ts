@@ -4,7 +4,7 @@ export type WeekdaysOptions = {
    * Corresponds to Intl.DateTimeFormatOptions["weekday"].
    * Default: "long"
    */
-  dayStyle?: Intl.DateTimeFormatOptions['weekday'];
+  style?: Intl.DateTimeFormatOptions['weekday'];
 
   /**
    * Case transformation for weekday labels.
@@ -13,49 +13,42 @@ export type WeekdaysOptions = {
    * - "lower": Lowercase all letters
    * Default: language's native casing
    */
-  formatCase?: 'capital' | 'upper' | 'lower';
+  case?: 'capital' | 'upper' | 'lower';
 
   /**
-   * Starting day of the week.
+   * First day of the week.
    * - 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-   * - "today" = start from current day
+   * - "current" = start from current day
    * Default: 0 (Sunday)
    */
-  startFrom?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 'today';
-};
+  first?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 'current';
 
-export function weekdays(locales?: string | string[], options?: WeekdaysOptions): string[];
-export function weekdays(options: WeekdaysOptions): string[];
+  /**
+   * Language(s).
+   * Default: default locale language
+   */
+  locales?: string | string[];
+};
 
 /**
  * Returns an array of weekday names.
  * @param options Configuration for weekday formatting.
- * - `dayStyle` defaults to `"short"`
- * - `formatCase` defaults to native casing
- * - `startFrom` defaults to `0` (Sunday)
+ * - `style` defaults to `"long"`
+ * - `case` defaults to native casing
+ * - `first` defaults to `0` (Sunday)
+ * - `locales` defaults to current locale
  */
-export function weekdays(
-  localesOrOptions?: string | string[] | WeekdaysOptions,
-  maybeOptions?: WeekdaysOptions,
-): string[] {
-  let locales: string | string[] | undefined;
-  let options: WeekdaysOptions | undefined;
-  if (typeof localesOrOptions === 'string' || Array.isArray(localesOrOptions)) {
-    locales = localesOrOptions;
-    options = maybeOptions;
-  } else {
-    options = localesOrOptions;
-  }
-  const { startFrom = 0, dayStyle = 'long', formatCase } = { ...options };
+export function weekdays(options?: WeekdaysOptions): string[] {
+  const { first = 0, style = 'long', locales, case: formatCase } = { ...options };
 
   const startDay = new Date();
-  if (startFrom !== 'today') {
+  if (first !== 'current') {
     // sets the start day as last sunday + first day
-    startDay.setDate(startDay.getDate() - startDay.getDay() + startFrom);
+    startDay.setDate(startDay.getDate() - startDay.getDay() + first);
   }
 
   const time = startDay.getTime();
-  const { format } = new Intl.DateTimeFormat(locales, { weekday: dayStyle });
+  const { format } = new Intl.DateTimeFormat(locales, { weekday: style });
   const MS_PER_DAY = 86400000;
   const days: string[] = [];
 

@@ -1,22 +1,74 @@
-# weekekdays
+# 📆 weekekdays
 
-Get an array of weekday names in any language, order, format (long, short, narrow; capitalized, uppercase, lowercase).
+Get an array of weekday names in any language, order, format.
 
-## Examples
+Supports:
 
-```jscript
-// get and array with the weekday names starting from Sunday in the current locale using its own format case
+- **Languages**: Any locale supported by `Intl.DateTimeFormat`
+- **Order**: Start from any day (Sunday, Monday, or even `"current"`)
+- **Format**:
+  - Style: `"long"`, `"short"`, `"narrow"`
+  - Case: `"capital"`, `"upper"`, `"lower"`
+
+---
+
+[![npm version](https://img.shields.io/npm/v/weekdays.svg)](https://www.npmjs.com/package/weekdays)
+[![License](https://img.shields.io/npm/l/weekdays.svg)](LICENSE)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/navigatrum/weekdays/ci.yml?branch=main)](https://github.com/navigatrum/weekdays/actions)
+[![Coverage](https://img.shields.io/codecov/c/github/navigatrum/weekdays)](https://codecov.io/gh/navigatrum/weekdays)
+
+---
+
+## 📦 Installation
+
+```bash
+npm install weekdays
+# or
+yarn add weekdays
+```
+
+## 🚀 Usage
+
+```ts
+import { weekdays } from "weekdays";
+```
+
+## 📚 Examples
+
+```ts
+// Weekdays in the current locale, starting from Sunday, using native casing
 weekdays();
 // ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-// get and array with the Arabic weekday names starting from Saturday
-weekdays("ar", { startFrom: 6 })
+// Frech weekdays, strating from Sunday, using native casing
+weekdays({ locales: "fr" });
+// ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
+
+// Arabic weekdays starting from Saturday
+weekdays({ first: 6, locales: "ar" });
 // ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة']
 
-// Spanish weekday names starting from Sunday in capital case
-// weekdays("es-Es", { startFrom: 1, formatCase: "capital" } )
-// ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+// Spanish weekdays starting from current day (e.g. Friday), capitalized, in short form
+weekdays({
+  first: "current",
+  case: "capital",
+  style: "short",
+  locales: "es-ES",
+});
+// ['Vie', 'Sáb', 'Dom', 'Lun', 'Mar', 'Mié', 'Jue']
 
-weekdays("zh-CN", { startFrom: 1, dayStyle: "short" } )
+// Chinese weekdays in short form, starting from Monday
+weekdays({ locales: "zh-CN", first: 1, style: "short" });
 // ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+```
+
+## 🛠️ Options
+
+```ts
+type WeekdaysOptions = {
+  locales?: string | string[]; // default: current locale
+  style?: "long" | "short" | "narrow"; // default: "long"
+  case?: "capital" | "upper" | "lower"; // default: native casing
+  first?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | "current"; // default: 0 (Sunday)
+};
 ```
