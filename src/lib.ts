@@ -2,7 +2,7 @@ export type WeekdaysOptions = {
   /**
    * Format style for weekday names.
    * Corresponds to Intl.DateTimeFormatOptions["weekday"].
-   * Default: "short"
+   * Default: "long"
    */
   dayStyle?: Intl.DateTimeFormatOptions['weekday'];
 
