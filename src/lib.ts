@@ -24,6 +24,9 @@ export type WeekdaysOptions = {
   startFrom?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 'today';
 };
 
+export function weekdays(locales?: string | string[], options?: WeekdaysOptions): string[];
+export function weekdays(options: WeekdaysOptions): string[];
+
 /**
  * Returns an array of weekday names.
  * @param options Configuration for weekday formatting.
@@ -31,7 +34,18 @@ export type WeekdaysOptions = {
  * - `formatCase` defaults to native casing
  * - `startFrom` defaults to `0` (Sunday)
  */
-export const weekdays = (locales?: string | string[], options?: WeekdaysOptions): string[] => {
+export function weekdays(
+  localesOrOptions?: string | string[] | WeekdaysOptions,
+  maybeOptions?: WeekdaysOptions,
+): string[] {
+  let locales: string | string[] | undefined;
+  let options: WeekdaysOptions | undefined;
+  if (typeof localesOrOptions === 'string' || Array.isArray(localesOrOptions)) {
+    locales = localesOrOptions;
+    options = maybeOptions;
+  } else {
+    options = localesOrOptions;
+  }
   const { startFrom = 0, dayStyle = 'long', formatCase } = { ...options };
 
   const startDay = new Date();
@@ -59,4 +73,4 @@ export const weekdays = (locales?: string | string[], options?: WeekdaysOptions)
   }
 
   return days;
-};
+}

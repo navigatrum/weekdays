@@ -1,7 +1,7 @@
 import { weekdays } from './lib.js';
 import { expect, describe, it, vi } from 'vitest';
 
-describe('weekdays', () => {
+describe('weekdays - "locales" as first arg', () => {
   it('returns long weekdays in the current locale starting from Sunday by default', () => {
     const { format } = new Intl.DateTimeFormat(undefined, { weekday: 'long' });
     const localeWeek: string[] = [];
@@ -77,5 +77,20 @@ describe('weekdays', () => {
     expect(result).toEqual(expected);
 
     vi.useRealTimers();
+  });
+});
+
+describe('weekdays - "WeekdaysOptions" as first arg', () => {
+  it('returns short weekdays in the current locale starting from Sunday', () => {
+    const { format } = new Intl.DateTimeFormat(undefined, { weekday: 'short' });
+    const localeWeek: string[] = [];
+    for (let day = 0; day < 7; day++) {
+      const date = new Date(2025, 9, 19 + day); // start from a Sunday
+      expect(date.getDay()).toBe(day);
+      localeWeek.push(format(date));
+    }
+
+    const result = weekdays({ dayStyle: 'short' });
+    expect(result).toEqual(localeWeek);
   });
 });
