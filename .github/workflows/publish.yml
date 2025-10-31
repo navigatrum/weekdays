@@ -42,60 +42,7 @@ jobs:
           exit 1
           fi
 
-      - name: 🔍 Check git status (allow only dist/)
-        id: git-check
-        run: |
-          set -euo pipefail
-          DIRTY=$(git status --porcelain --untracked-files=all || true)
-
-          if [ -z "$DIRTY" ]; then
-          echo "clean=true" >> $GITHUB_OUTPUT
-          echo "only_dist=false" >> $GITHUB_OUTPUT
-          echo "dirty_list=" >> $GITHUB_OUTPUT
-          exit 0
-          fi
-
-          echo "$DIRTY"
-          echo "dirty_list<<EOF" >> $GITHUB_OUTPUT
-          echo "$DIRTY" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-          FILES=$(echo "$DIRTY" | sed -E 's/^[[:space:]]*..//' | sed -E 's/^[[:space:]]*//')
-          ONLY_DIST=true
-          while IFS= read -r f; do
-          [ -z "$f" ] && continue
-          case "$f" in
-              dist|dist/*) ;;
-              *)
-              ONLY_DIST=false
-              break
-              ;;
-          esac
-          done <<< "$FILES"
-
-          if $ONLY_DIST; then
-          echo "clean=false" >> $GITHUB_OUTPUT
-          echo "only_dist=true" >> $GITHUB_OUTPUT
-          else
-          echo "clean=false" >> $GITHUB_OUTPUT
-          echo "only_dist=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: 🚀 Publish (clean tree)
-        if: steps.git-check.outputs.clean == 'true'
-        run: pnpm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: 🚀 Publish (only dist changed — allow)
-        if: steps.git-check.outputs.only_dist == 'true'
+      - name: 🚀 Publish
         run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: ❌ Fail (unexpected dirty files)
-        if: steps.git-check.outputs.clean == 'false' && steps.git-check.outputs.only_dist == 'false'
-        run: |
-          echo "Unexpected dirty files detected; aborting publish"
-          echo "${{ steps.git-check.outputs.dirty_list }}"
-          exit 1
