@@ -1,4 +1,4 @@
-# 📆 weekekdays
+# 📆 weekedays 
 
 Get an array of weekday names in any language, order, format.
 
@@ -40,7 +40,7 @@ import { weekdays } from "weekdays";
 weekdays();
 // ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-// Frech weekdays, strating from Sunday, using native casing
+// French weekdays, starting from Sunday, using native casing
 weekdays({ locales: "fr" });
 // ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
 
