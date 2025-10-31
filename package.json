@@ -1,6 +1,6 @@
 {
   "name": "@navigatrum/weekdays",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Get an array of weekday names in any language, order, format.",
   "main": "dist/index.js",
   "type": "module",
