@@ -22,9 +22,11 @@ Supports:
 ## 📦 Installation
 
 ```bash
-npm install weekdays
+npm install @navigatrum/weekdays
 # or
-yarn add weekdays
+yarn add @navigatrum/weekdays
+#or
+pnpm add @navigatrum/weekdays
 ```
 
 ## 🚀 Usage
