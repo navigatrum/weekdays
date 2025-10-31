@@ -1,5 +1,5 @@
 {
-  "name": "weekdays",
+  "name": "@navigatrum/weekdays",
   "version": "1.0.3",
   "description": "Get an array of weekday names in any language, order, format.",
   "main": "dist/index.js",
