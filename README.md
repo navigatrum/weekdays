@@ -1,4 +1,4 @@
-# 📆 weekedays 
+# 📆 weekedays
 
 Get an array of weekday names in any language, order, format.
 

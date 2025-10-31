@@ -23,10 +23,10 @@ export type WeekdaysOptions = {
    */
   first?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 'current';
 
- /**
- * Language(s) used for localization.
- * Default: system/browser locale
- */
+  /**
+   * Language(s) used for localization.
+   * Default: system/browser locale
+   */
   locales?: string | string[];
 };
 
